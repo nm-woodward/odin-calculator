@@ -1,7 +1,7 @@
 
 let displayNumber = 0;
 let storedNumber = 0;
-
+let storedOperand;
 
 
 // Function to store number click as text in displayNumber
@@ -25,11 +25,17 @@ numberButtons.forEach((numberButton) => {
 });
 
 // Store away displayNumber
-
 function storeDisplay() {
     storedNumber = displayNumber;
     displayNumber = 0;
 }
+
+// Store away operand
+function storeOperand(operator) {
+    storeDisplay();
+    storedOperand = operator;
+}
+
 
 // OPERATOR FUNCTIONS
 function add(a,b) {
@@ -53,4 +59,13 @@ function divide(a,b) {
 
 function operate(operatorFunction, a, b) {
     return(operatorFunction(a,b));
+}
+
+// Equals sign
+function equals(operatorFunction,a,b) {
+    displayNumber = operate(operatorFunction, a, b);
+    updateDisplayNumber();
+    storedNumber = 0;
+    storedOperand = null;
+    
 }
