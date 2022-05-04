@@ -8,8 +8,8 @@ let storedOperand;
 const viwerContent = document.querySelector('.viewer');
 
 function updateDisplayNumber(newAddition) {
-    displayNumber = Number(String(displayNumber) + String(newAddition));
-    viwerContent.textContent = displayNumber;
+    displayNumber = Number(String(displayNumber) + (newAddition ? String(newAddition) : ''));
+    viwerContent.textContent = Math.round(displayNumber*10)/10;
 }
 
 
@@ -57,6 +57,10 @@ function divide(a,b) {
     {return a / b;}
 }
 
+function addDecimal(a,b) {
+    return (Math.round(a*100+b*10) / 10)
+}
+
 function operate(operatorFunction, a, b) {
     return(operatorFunction(a,b));
 }
@@ -68,4 +72,17 @@ function equals(operatorFunction,a,b) {
     storedNumber = 0;
     storedOperand = null;
     
+}
+
+// CLEAR + DELETE
+
+function clearScreen() {
+    displayNumber = 0;
+    storedOperand = null;
+    updateDisplayNumber();
+}
+
+function deleteDigit() {
+    displayNumber = Number(String(displayNumber).slice(0, String(displayNumber).length-1));
+    updateDisplayNumber();
 }
